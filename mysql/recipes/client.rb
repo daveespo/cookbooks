@@ -40,7 +40,8 @@ package "mysql-devel" do
   action :install
 end
 
-if platform?(%w{ debian ubuntu redhat centos fedora suse })
+if platform?(%w{ debian ubuntu fedora suse }) ||
+    (platform?(%w{centos redhat}) && node.platform_version.to_f < 6)
 
   package "mysql-ruby" do
     package_name value_for_platform(
